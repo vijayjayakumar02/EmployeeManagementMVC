@@ -1,0 +1,80 @@
+﻿@model IEnumerable<DataAccessLayer.ViewModels.EmployeeViewModel>
+
+@{
+    ViewBag.Title = "Employee Dashboard";
+}
+
+<div class="row">
+    <a class="btn btn-outline-primary" style="margin:5px" type="button" asp-action="CreateEmployee" asp-controller="Employee">Create Employee</a>
+    <div class="col-12">
+        <table id="myTable" class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Code</th>
+                    <th scope="col">Lastname</th>
+                    <th scope="col">Firstname</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Date updated</th>
+                    <th scope="col">PAN</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Any())
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(model => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.Code)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.gender)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.DateOfJoining)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model=>item.Pan)
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td>There is no Record for the given date</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<style>
+    .table{
+        overflow-y:auto;
+    }
+    .dataTables_paginate{
+        display:none;
+    }
+    .table-responsive {
+        max-height: 300px;
+    }
+</style>
+
+@await Html.PartialAsync("_Pagination", 5)

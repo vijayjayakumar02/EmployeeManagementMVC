@@ -1,0 +1,83 @@
+﻿@model DataAccessLayer.ViewModels.EmployeeViewModel
+
+<form method="post" asp-action="CreateEmployee" asp-controller="Employee">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="Firstname">First Name</label><span class="text-danger">*</span>
+                <input type="text" class="form-control" id="Firstname" asp-for="FirstName" placeholder="Enter your First Name.." required />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <input type="text" class="form-control" id="lastname" asp-for="LastName" placeholder="Enter your last Name.." required />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Email address</label><span class="text-danger">*</span>
+                <input type="email" class="form-control" id="exampleFormControlInput1" asp-for="Email" placeholder="name@example.com" required />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select class="form-select" asp-for="genderId" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">Male</option>
+                    <option value="2">Female</option>
+                    <option value="3">Transgender</option>
+                    <option value="4">Prefer Not To Say</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="DateOfJoining">Date Of Joining</label>
+                <input type="date" style="margin-top:10px" id="DateOfJoining" name="DateOfJoining" asp-for="DateOfJoining" required />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="pan">Pan</label><span class="text-danger">*</span>
+                <input type="text" class="form-control" id="pan" asp-for="Pan" style="text-transform:uppercase;" onkeyup="InputToUpper(this);" placeholder="enter your pan Id.." required />
+                <span asp-validation-for="Pan" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="Aadhar">Aadhar</label><span class="text-danger">*</span>
+                <input type="text" class="form-control" id="Aadhar" asp-for="Aadhar" placeholder="enter your aadhar number..." required />
+                <span asp-validation-for="Aadhar" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-success btn-ld" type="submit" style="margin:10px;float:right; margin-bottom:10px">Save</button>
+    <button class="btn btn-danger" style="margin-top:3px" id="cancel" type="button" onclick="window.history.back()">Cancel</button>
+</form>
+
+<style>
+    .required input:after {
+        content: "*";
+        color:red;
+    }
+</style>
+
+<script type="text/javascript">
+    function Alert() {
+        alert("Click ok to Save your Details...");
+    }
+    function InputToUpper(obj) {
+        if (obj.value != "") {
+            obj.value = obj.value.toUpperCase();
+        }
+    }
+</script>
+
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,4 +1,6 @@
-using DataAccessLayer.Interface;
+using BusinessLayer.Methods;
+using DataAccessLayer.Data;
+using DataAccessLayer.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,8 +30,11 @@ namespace EmployeeManagement
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddTransient<IDapper>(f => new DataAccessLayer.Access.Dapper("Server=TRAINEE-09; Database=EmployeeManagement; User ID=sa; Password=412417105083Vj;Trusted_Connection=false;MultipleActiveResultSets=true;"));
 
-            services.AddTransient<ICrudDAL>(connection => new DataAccessLayer.Method.CrudDAL("Server = TRAINEE-03; Database = EmployeeManagement; User Id = sa; Password = @9543890461My; Trusted_Connection = False; MultipleActiveResultSets = True;"));
+            services.AddScoped<EmployeeBL>();
+            services.AddScoped<EmployeeManagementContext>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +61,7 @@ namespace EmployeeManagement
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Employee}/{action=Index}/{id?}");
             });
         }
     }
